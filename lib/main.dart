@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:algolia/algolia.dart';
-import 'themes/theme_provider.dart';
-import 'themes/dark_mode.dart';
+import 'package:hackathon2024_pizamka/themes/dark_mode.dart';
+import 'package:hackathon2024_pizamka/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:algolia/algolia.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Hackathon Plock 2024',
             theme: themeProvider.themeData,
-            darkTheme: darkMode, // Zakładając, że masz zdefiniowany darkMode
+            darkTheme: darkMode,
             themeMode: themeProvider.themeMode,
-            home: MyHomePage(title: 'cos'),
+            home: const HomePage(),
           );
         },
       ),
@@ -36,16 +36,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   TextEditingController _controller = TextEditingController();
   List<String> _suggestions = [];
 
@@ -76,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nazwa apki'),
+        title: const Text('Home Page'),
         scrolledUnderElevation: 4,
         shadowColor: Theme.of(context).colorScheme.shadow,
         actions: [
@@ -99,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      drawer: AppDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -129,6 +128,137 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search Page'),
+        scrolledUnderElevation: 4,
+        shadowColor: Theme.of(context).colorScheme.shadow,
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: Icon(
+                Provider.of<ThemeProvider>(context).themeData == darkMode
+                    ? Icons.nights_stay
+                    : Icons.wb_sunny,
+                size: 30,
+                color: Provider.of<ThemeProvider>(context).themeData == darkMode
+                    ? Colors.white
+                    : Colors.black,
+              ),
+              onPressed: () {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .toggleTheme();
+              },
+            ),
+          ),
+        ],
+      ),
+      drawer: AppDrawer(),
+      body: Center(
+        child: Text('Search Page'),
+      ),
+    );
+  }
+}
+
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings Page'),
+        scrolledUnderElevation: 4,
+        shadowColor: Theme.of(context).colorScheme.shadow,
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: Icon(
+                Provider.of<ThemeProvider>(context).themeData == darkMode
+                    ? Icons.nights_stay
+                    : Icons.wb_sunny,
+                size: 30,
+                color: Provider.of<ThemeProvider>(context).themeData == darkMode
+                    ? Colors.white
+                    : Colors.black,
+              ),
+              onPressed: () {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .toggleTheme();
+              },
+            ),
+          ),
+        ],
+      ),
+      drawer: AppDrawer(),
+      body: Center(
+        child: Text('Settings Page'),
+      ),
+    );
+  }
+}
+
+class AppDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+            child: Text(
+              'Menu',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.search),
+            title: Text('Search'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
