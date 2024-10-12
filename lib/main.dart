@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hackathon2024_pizamka/themes/dark_mode.dart';
 import 'package:hackathon2024_pizamka/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:algolia/algolia.dart';
+import 'package:deadsimplechat_sdk_flutter/deadsimplechat_sdk_flutter.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
-final Algolia algolia = Algolia.init(
-  applicationId: 'YOUR_APP_ID', // Twój App ID z Algolii
-  apiKey: 'YOUR_API_KEY', // Twój API Key z Algolii
-);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,28 +39,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _controller = TextEditingController();
-  List<String> _suggestions = [];
-
-  // Funkcja pobierająca wyniki z Algolii
-  Future<void> _getAutocompleteSuggestions(String query) async {
-    if (query.isEmpty) {
-      setState(() {
-        _suggestions = [];
-      });
-      return;
-    }
-
-    AlgoliaQuery algoliaQuery =
-        algolia.instance.index('YOUR_INDEX_NAME').query(query);
-    AlgoliaQuerySnapshot snap = await algoliaQuery.getObjects();
-
-    setState(() {
-      _suggestions =
-          snap.hits.map((hit) => hit.data['name'].toString()).toList();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -102,30 +75,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(
-                hintText: 'Search...',
-              ),
-              onChanged: (query) {
-                _getAutocompleteSuggestions(
-                    query); // Autocomplete na zmianę tekstu
-              },
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _suggestions.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(_suggestions[index]),
-                    onTap: () {
-                      // Możesz dodać akcję po wybraniu sugestii
-                      _controller.text = _suggestions[index];
-                    },
-                  );
-                },
-              ),
-            ),
+            // Możesz dodać inne widżety tutaj
           ],
         ),
       ),
@@ -165,7 +115,13 @@ class SearchPage extends StatelessWidget {
       ),
       drawer: AppDrawer(),
       body: Center(
-        child: Text('Search Page'),
+        child: DeadSimpleChat(
+          roomId: 'rcmw6sZSa',
+          publicKey:
+              'pub_3344556c5778474d2d5a4d486743674c4c53326d314d467836386d6649415f42755f6250594a752d3764426446553733',
+          controller: DeadSimpleChatController(),
+          onMessage: (message) => print('Message received: $message'),
+        ),
       ),
     );
   }
