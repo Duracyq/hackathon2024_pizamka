@@ -3,10 +3,11 @@ import 'dart:io';
 // import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 Future<bool> checkForDuplicates(String street, String date) async {
   final querySnapshot = await FirebaseFirestore.instance
-      .collection('yourCollection')
+      .collection('harmonogram')
       .where('street', isEqualTo: street)
       .where('date', isEqualTo: date)
       .get();
@@ -38,7 +39,7 @@ Future<List<Map<String, String>>> loadCSVData(String filePath) async {
 
 
 Future<void> insertDataToFirestore(String street, String date, String type) async {
-  await FirebaseFirestore.instance.collection('yourCollection').add({
+  await FirebaseFirestore.instance.collection('harmonogram').add({
     'street': street,
     'date': date,
     'type': type,
@@ -59,9 +60,9 @@ Future<void> processCSVAndUpload(String filePath) async {
 
     if (!isDuplicate) {
       await insertDataToFirestore(street, date, type);
-      print('Inserted: $street, $date, $type');
+      debugPrint('Inserted: $street, $date, $type');
     } else {
-      print('Duplicate found, skipping: $street, $date');
+      debugPrint('Duplicate found, skipping: $street, $date');
     }
   }
 }

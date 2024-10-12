@@ -91,3 +91,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+assets:
+  - assets/wywoz_danych_all_adresy_corrected.csv
+  - assets/wywoz_danych_rejon2_corrected.csv
