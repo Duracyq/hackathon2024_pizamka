@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">342790844852</string>
+    <string name="google_api_key" translatable="false">AIzaSyASb2D7cTVu_ZktqL8cGxEu1uEeASgB8I0</string>
+    <string name="google_app_id" translatable="false">1:342790844852:android:6ebe225209ccb53f4402e1</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyASb2D7cTVu_ZktqL8cGxEu1uEeASgB8I0</string>
+    <string name="google_storage_bucket" translatable="false">hackathon2024-438407.appspot.com</string>
+    <string name="project_id" translatable="false">hackathon2024-438407</string>
+</resources>
