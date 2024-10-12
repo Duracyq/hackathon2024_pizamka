@@ -39,78 +39,85 @@ class _AppDrawerState extends State<AppDrawer>
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          GestureDetector(
-            onTap: _toggleDrawer,
-            child: AnimatedContainer(
-              duration: Duration(seconds: 1),
-              curve: Curves.easeInOut,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: DrawerHeader(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'Menu',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            GestureDetector(
+              onTap: _toggleDrawer,
+              child: AnimatedContainer(
+                height: 110,
+                duration: Duration(seconds: 1),
+                curve: Curves.easeInOut,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).primaryColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
                     ),
                   ],
                 ),
+                child: DrawerHeader(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'Menu',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text('Search'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
-              );
-            },
-          ),
-        ],
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.search),
+              title: Text('Search'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
