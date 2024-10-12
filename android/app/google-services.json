@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342790844852",
+    "project_id": "hackathon2024-438407",
+    "storage_bucket": "hackathon2024-438407.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342790844852:android:6ebe225209ccb53f4402e1",
+        "android_client_info": {
+          "package_name": "com.example.hackathon2024_pizamka"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASb2D7cTVu_ZktqL8cGxEu1uEeASgB8I0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
