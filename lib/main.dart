@@ -7,7 +7,13 @@ import 'package:deadsimplechat_sdk_flutter/deadsimplechat_sdk_flutter.dart';
 import 'drawer.dart';
 import 'home.dart';
 
-void main() {
+
+Future<void> main() async {
+  await Firebase.initializeApp(
+
+    options: DefaultFirebaseOptions.currentPlatform,
+
+  );
   runApp(const MyApp());
 }
 

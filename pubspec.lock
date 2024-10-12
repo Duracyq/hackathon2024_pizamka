@@ -161,6 +161,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+
   flutter:
     dependency: "direct main"
     description: flutter
@@ -604,6 +605,7 @@ packages:
       sha256: "7a3f37b05d989967cdddcbb571f1ea834867ae2faa29725fd085180e0883aa15"
       url: "https://pub.dev"
     source: hosted
+
     version: "1.1.0"
 sdks:
   dart: ">=3.5.0 <4.0.0"
