@@ -5,39 +5,19 @@ import 'drawer.dart';
 import 'themes/dark_mode.dart';
 import 'themes/theme_provider.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class Info extends StatefulWidget {
+  const Info({super.key});
 
   @override
+  State<Info> createState() => _InfoState();
+}
+
+class _InfoState extends State<Info> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings Page'),
-        scrolledUnderElevation: 4,
-        shadowColor: Theme.of(context).colorScheme.shadow,
-        actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: Icon(
-                Provider.of<ThemeProvider>(context).themeData == darkMode
-                    ? Icons.nights_stay
-                    : Icons.wb_sunny,
-                size: 30,
-                color: Provider.of<ThemeProvider>(context).themeData == darkMode
-                    ? Colors.white
-                    : Colors.black,
-              ),
-              onPressed: () {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .toggleTheme();
-              },
-            ),
-          ),
-        ],
-      ),
-      drawer: AppDrawer(),
-      body: Center(
-        child: Text('Settings Page'),
+    return Center(
+      child: Container(
+        child: Center(child: Text('Info Page')),
       ),
     );
   }

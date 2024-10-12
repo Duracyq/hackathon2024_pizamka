@@ -109,16 +109,6 @@ class _AppDrawerState extends State<AppDrawer>
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
               title: Text('test'),
               onTap: () {
                 Navigator.pushReplacement(

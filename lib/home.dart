@@ -1,8 +1,10 @@
 import 'package:cuberto_bottom_bar/internal/internal.dart';
 import 'package:dot_curved_bottom_nav/dot_curved_bottom_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:hackathon2024_pizamka/info.dart';
 import 'package:provider/provider.dart';
 import 'package:getwidget/getwidget.dart';
+import 'appbars/home_appbar.dart';
 import 'drawer.dart';
 import 'homehome_page.dart';
 import 'nowy_search.dart';
@@ -21,8 +23,13 @@ class _HomePageState extends State<HomePage> {
   String _currentTitle = "Home";
   Color _currentColor = Colors.blue;
   final Color _inactiveColor = Colors.grey;
-  final List<Widget> _pages = [SearchPageNew(), HomeHomePage(), HomeHomePage()];
-
+  final List<String> _titles = ["Search", "Home", "Settings"];
+  final List<Widget> _pages = [SearchPageNew(), HomeHomePage(), Info()];
+  final List<Widget> _appbars = [
+    HomeAppBar(),
+    HomeAppBar(),
+    HomeAppBar(),
+  ];
   void _onTabTapped(int index) {
     setState(() {
       _currentPage = index;
@@ -67,7 +74,8 @@ class _HomePageState extends State<HomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        centerTitle: true,
+        title: Text(_titles[_currentPage]),
         scrolledUnderElevation: 4,
         shadowColor: Theme.of(context).colorScheme.shadow,
         actions: [
@@ -90,7 +98,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: AppDrawer(),
+      //drawer: AppDrawer(),
       body: _pages[_currentPage],
       bottomNavigationBar: DotCurvedBottomNav(
         hideOnScroll: false,
