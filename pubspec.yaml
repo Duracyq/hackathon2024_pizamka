@@ -40,6 +40,7 @@ dependencies:
   getwidget: ^4.0.0
   cuberto_bottom_bar: ^3.1.0
   dot_curved_bottom_nav: ^0.0.2
+  firebase_core: ^3.6.0
 
 dev_dependencies:
   flutter_test:
