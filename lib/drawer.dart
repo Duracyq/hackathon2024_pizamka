@@ -4,6 +4,7 @@ import 'home.dart';
 import 'info.dart';
 import 'main.dart';
 import 'search.dart';
+import 'test.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -113,6 +114,17 @@ class _AppDrawerState extends State<AppDrawer>
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const SettingsPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('test'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NavigationDrawerExample()),
                 );
               },
             ),

@@ -38,6 +38,8 @@ dependencies:
   shared_preferences: ^2.3.2
   provider: ^6.1.2
   getwidget: ^4.0.0
+  cuberto_bottom_bar: ^3.1.0
+  dot_curved_bottom_nav: ^0.0.2
 
 dev_dependencies:
   flutter_test:
