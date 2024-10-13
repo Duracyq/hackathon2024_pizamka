@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_currentPage],
       bottomNavigationBar: DotCurvedBottomNav(
         hideOnScroll: false,
-        indicatorColor: Colors.blue,
+        indicatorColor: Theme.of(context).colorScheme.primary,
         backgroundColor: Colors.black,
         animationDuration: const Duration(milliseconds: 300),
         animationCurve: Curves.ease,
@@ -125,15 +125,21 @@ class _HomePageState extends State<HomePage> {
         items: [
           Icon(
             Icons.search,
-            color: _currentPage == 0 ? Colors.blue : Colors.white,
+            color: _currentPage == 0
+                ? Theme.of(context).colorScheme.primary
+                : Colors.white,
           ),
           Icon(
             Icons.home,
-            color: _currentPage == 1 ? Colors.blue : Colors.white,
+            color: _currentPage == 1
+                ? Theme.of(context).colorScheme.primary
+                : Colors.white,
           ),
           Icon(
             Icons.info,
-            color: _currentPage == 2 ? Colors.blue : Colors.white,
+            color: _currentPage == 2
+                ? Theme.of(context).colorScheme.primary
+                : Colors.white,
           ),
         ],
       ),
