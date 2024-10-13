@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:getwidget/getwidget.dart';
 import 'appbars/home_appbar.dart';
 import 'drawer.dart';
+import 'event_design_page.dart';
 import 'homehome_page.dart';
 import 'nowy_search.dart';
 import 'themes/dark_mode.dart';
@@ -20,11 +21,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentPage = 0;
-  String _currentTitle = "Home";
+  String _currentTitle = "Wyszukaj harmonogramu";
   Color _currentColor = Colors.blue;
   final Color _inactiveColor = Colors.grey;
-  final List<String> _titles = ["Search", "Home", "Settings"];
-  final List<Widget> _pages = [SearchPageNew(), HomeHomePage(), Info()];
+  final List<String> _titles = [
+    "Wyszukaj odpad",
+    "Wyszukaj harmonogramu",
+    "Informacje"
+  ];
+  final List<Widget> _pages = [
+    SearchPageNew(),
+    HomeHomePage(),
+    EventListPage()
+  ];
   final List<Widget> _appbars = [
     HomeAppBar(),
     HomeAppBar(),
