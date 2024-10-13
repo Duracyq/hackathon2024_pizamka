@@ -50,6 +50,7 @@ dependencies:
  
   cached_network_image: ^3.4.1
   custom_sliding_segmented_control: ^1.8.3
+  firebase_messaging: ^15.1.3
   
 
 
