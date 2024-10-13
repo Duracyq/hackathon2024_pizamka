@@ -15,10 +15,10 @@ class HomeHomePage extends StatefulWidget {
 
 class _HomeHomePageState extends State<HomeHomePage> {
   // Przykładowa lista danych
-  void _navigateToAnotherPage() {
+  void _navigateToAnotherPage(String ulica) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => EventList()),
+      MaterialPageRoute(builder: (context) => EventList(query: ulica,)),
     );
   }
 
@@ -63,39 +63,6 @@ class _HomeHomePageState extends State<HomeHomePage> {
     }
   }
 
-  String parseDataWywozu(dynamic responseBody) {
-    if (responseBody is String) {
-      try {
-        var parsedData =
-            jsonDecode(responseBody) as List<dynamic>; // Parse as a list
-        List<String> formattedDates = []; // To store formatted dates
-
-        for (var timestamp in parsedData) {
-          DateTime date = DateTime.fromMillisecondsSinceEpoch(
-              timestamp * 1000); // Convert timestamp
-          String formattedDate =
-              DateFormat('dd-MM-yyyy').format(date); // Format date
-          formattedDates.add(formattedDate); // Add to the list
-        }
-
-        return formattedDates.join(', '); // Join formatted dates with a comma
-      } catch (e) {
-        print('Error parsing timestamps: $e');
-        return 'Invalid data'; // Handle parsing error
-      }
-    } else if (responseBody is List) {
-      List<String> formattedDates = [];
-      for (var timestamp in responseBody) {
-        DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-        String formattedDate = DateFormat('dd-MM-yyyy').format(date);
-        formattedDates.add(formattedDate);
-      }
-      return formattedDates.join(', ');
-    } else {
-      return 'Invalid data'; // Handle unsupported data type
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,8 +74,7 @@ class _HomeHomePageState extends State<HomeHomePage> {
             onChanged: (value) async {
               if (value.isNotEmpty) {
                 queryTemp = value; // Store the current query
-                await fetchData(
-                    value); // Call the fetchData function on text change
+                await fetchData(value); // Call the fetchData function on text change
               } else {
                 setState(() {
                   searchResults = []; // Clear results if search is empty
@@ -133,14 +99,13 @@ class _HomeHomePageState extends State<HomeHomePage> {
               var streetName = searchResults[index];
               return ListTile(
                 title: Text(streetName),
+                onTap: () {
+                  _navigateToAnotherPage(streetName);
+                },
               );
             },
           ),
           const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _navigateToAnotherPage,
-            child: Text('Go to List Event Page'),
-          ),
         ],
       ),
     );
