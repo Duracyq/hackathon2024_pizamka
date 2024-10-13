@@ -5,6 +5,7 @@ import 'package:hackathon2024_pizamka/event_list.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import './components/video_player.dart';
 
 class HomeHomePage extends StatefulWidget {
   const HomeHomePage({super.key});
@@ -90,7 +91,11 @@ class _HomeHomePageState extends State<HomeHomePage> {
               ),
             ),
           ),
+          const SizedBox(height: 20),
+          if(queryTemp.isEmpty)
+          VideoPlayerComponent(videoUrl: 'https://naszesmieci.mos.gov.pl/images/filmy/2020/Piatka-za-segregacj-Spot-30-sek.mp4'),
           // Display the search results
+          if(queryTemp.isNotEmpty)
           ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
