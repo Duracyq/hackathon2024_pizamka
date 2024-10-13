@@ -84,6 +84,13 @@ flutter:
       - assets/3.png
       - assets/2.jpg
       - assets/1.png
+      - lib/prompt.txt
+      - assets/black.png
+      - assets/yellow.png
+      - assets/green.png
+      - assets/red.png
+      - assets/blue.png
+      - assets/dzieci.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

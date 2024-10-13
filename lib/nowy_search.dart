@@ -35,6 +35,38 @@ class _SearchPageNewState extends State<SearchPageNew> {
     });
   }
 
+  final List<Map<String, String>> cardData = [
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Tytuł 1',
+      'description': 'Opis karty 1. To jest przykładowy opis dla karty numer 1.'
+    },
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Tytuł 2',
+      'description': 'Opis karty 2. To jest przykładowy opis dla karty numer 2.'
+    },
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Tytuł 3',
+      'description': 'Opis karty 3. To jest przykładowy opis dla karty numer 3.'
+    },
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Tytuł 4',
+      'description': 'Opis karty 4. To jest przykładowy opis dla karty numer 4.'
+    },
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Tytuł 5',
+      'description': 'Opis karty 5. To jest przykładowy opis dla karty numer 5.'
+    },
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Tytuł 6',
+      'description': 'Opis karty 6. To jest przykładowy opis dla karty numer 6.'
+    },
+  ];
   Future<void> _uploadImage() async {
     if (_image == null) return;
 
