@@ -69,8 +69,10 @@ class _SearchPageNewState extends State<SearchPageNew> {
   String _responseMessage = ""; // Variable to hold the response from the API
 
   Future<void> uploadImage(File imageFile) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:8000/api/upload/'));
-    request.files.add(await http.MultipartFile.fromPath('file', imageFile.path));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://10.0.2.2:8000/api/upload/'));
+    request.files
+        .add(await http.MultipartFile.fromPath('file', imageFile.path));
 
     try {
       var response = await request.send();
@@ -78,11 +80,13 @@ class _SearchPageNewState extends State<SearchPageNew> {
       if (response.statusCode == 200) {
         // Read the response from the API
         final responseBody = await http.Response.fromStream(response);
-        final Map<String, dynamic> data = json.decode(responseBody.body); // Decode the JSON response
+        final Map<String, dynamic> data =
+            json.decode(responseBody.body); // Decode the JSON response
 
         setState(() {
           // Update the state with the response message
-          _responseMessage = data['bin_suggestion'] ?? "No suggestion received.";
+          _responseMessage =
+              data['bin_suggestion'] ?? "No suggestion received.";
         });
       } else {
         setState(() {
@@ -99,7 +103,7 @@ class _SearchPageNewState extends State<SearchPageNew> {
   void pickAndUploadImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    
+
     if (pickedFile != null) {
       File image = File(pickedFile.path);
       setState(() {
@@ -117,7 +121,7 @@ class _SearchPageNewState extends State<SearchPageNew> {
 
   int _currentIndex = 0;
   final PageController _pageController = PageController();
-
+  final PageController _cardController = PageController();
   @override
   Widget build(BuildContext context) {
     bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
@@ -252,15 +256,60 @@ class _SearchPageNewState extends State<SearchPageNew> {
                         //   ),
                         // ),
                         const SizedBox(height: 20),
-                        if(_currentIndex == 1)
-                          Text(_fetchedText),
-                        if(_currentIndex == 0)
                         Text(
                           _responseMessage,
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 16),
                         ),
-
+                        const SizedBox(height: 20),
+                        Container(
+                            height: 300,
+                            child: PageView.builder(
+                                controller: _cardController,
+                                itemCount: 6,
+                                itemBuilder: (context, index) {
+                                  return Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                    elevation: 5,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(16.0),
+                                          ),
+                                          child: Image.network(
+                                            'https://via.placeholder.com/150',
+                                            height: 150,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Tytuł $index',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Text(
+                                            'Opis karty $index. To jest przykładowy opis dla karty numer $index.',
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                })),
                       ],
                     ),
                   ),
