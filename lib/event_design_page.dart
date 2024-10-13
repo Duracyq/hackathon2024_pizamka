@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'themes/theme_provider.dart';
 
 class EventListPage extends StatefulWidget {
   @override
@@ -30,6 +33,9 @@ class _EventListPageState extends State<EventListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode =
+        Provider.of<ThemeProvider>(context).themeData.brightness ==
+            Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         title: Text('Lista Wydarzeń'),
@@ -39,7 +45,14 @@ class _EventListPageState extends State<EventListPage> {
         itemBuilder: (context, index) {
           final event = events[index];
           return Card(
+            color: isDarkMode ? Color(0xFF422931) : Color(0xFFFFFFFF),
             margin: EdgeInsets.all(10),
+            elevation:
+                isDarkMode ? 40 : 10, // Większa wartość dla ciemnego motywu
+            shadowColor: isDarkMode
+                ? Colors.black.withOpacity(0.8)
+                : Colors.grey.withOpacity(0.5), // Cień dla ciemnego motywu
+
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Column(

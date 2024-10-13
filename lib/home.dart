@@ -9,6 +9,7 @@ import 'drawer.dart';
 import 'event_design_page.dart';
 import 'homehome_page.dart';
 import 'nowy_search.dart';
+import 'settings.dart';
 import 'themes/dark_mode.dart';
 import 'themes/theme_provider.dart';
 
@@ -74,6 +75,13 @@ class _HomePageState extends State<HomePage> {
       ),
     ),
   ];
+  void _navigateToSettings() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Settings()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -88,22 +96,15 @@ class _HomePageState extends State<HomePage> {
         scrolledUnderElevation: 4,
         shadowColor: Theme.of(context).colorScheme.shadow,
         actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: Icon(
-                Provider.of<ThemeProvider>(context).themeData == darkMode
-                    ? Icons.nights_stay
-                    : Icons.wb_sunny,
-                size: 30,
-                color: Provider.of<ThemeProvider>(context).themeData == darkMode
-                    ? Colors.white
-                    : Colors.black,
-              ),
-              onPressed: () {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .toggleTheme();
-              },
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              size: 30,
+              color: Provider.of<ThemeProvider>(context).themeData == darkMode
+                  ? Colors.white
+                  : Colors.black,
             ),
+            onPressed: _navigateToSettings,
           ),
         ],
       ),
