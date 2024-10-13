@@ -66,7 +66,48 @@ class _SearchPageNewState extends State<SearchPageNew> {
     }
   }
 
-  
+  String _responseMessage = ""; // Variable to hold the response from the API
+
+  Future<void> uploadImage(File imageFile) async {
+    var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:8000/api/upload/'));
+    request.files.add(await http.MultipartFile.fromPath('file', imageFile.path));
+
+    try {
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        // Read the response from the API
+        final responseBody = await http.Response.fromStream(response);
+        final Map<String, dynamic> data = json.decode(responseBody.body); // Decode the JSON response
+
+        setState(() {
+          // Update the state with the response message
+          _responseMessage = data['bin_suggestion'] ?? "No suggestion received.";
+        });
+      } else {
+        setState(() {
+          _responseMessage = "Failed to upload image.";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _responseMessage = "Error: $e"; // Update state in case of an error
+      });
+    }
+  }
+
+  void pickAndUploadImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    
+    if (pickedFile != null) {
+      File image = File(pickedFile.path);
+      setState(() {
+        _image = image;
+      });
+      await uploadImage(image);
+    }
+  }
 
   @override
   void initState() {
@@ -173,7 +214,7 @@ class _SearchPageNewState extends State<SearchPageNew> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ElevatedButton(
-                                onPressed: _pickImage,
+                                onPressed: pickAndUploadImage,
                                 child: const Text('Wybierz obraz'),
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
@@ -185,19 +226,19 @@ class _SearchPageNewState extends State<SearchPageNew> {
                                       isDarkTheme ? Colors.black : Colors.grey,
                                 ),
                               ),
-                              ElevatedButton(
-                                onPressed: _uploadImage,
-                                child: const Text('Prześlij obraz'),
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        8.0), // Mniej zaokrąglone rogi
-                                  ),
-                                  elevation: 5,
-                                  shadowColor:
-                                      isDarkTheme ? Colors.black : Colors.grey,
-                                ),
-                              ),
+                              // ElevatedButton(
+                              //   onPressed: _uploadImage,
+                              //   child: const Text('Prześlij obraz'),
+                              //   style: ElevatedButton.styleFrom(
+                              //     shape: RoundedRectangleBorder(
+                              //       borderRadius: BorderRadius.circular(
+                              //           8.0), // Mniej zaokrąglone rogi
+                              //     ),
+                              //     elevation: 5,
+                              //     shadowColor:
+                              //         isDarkTheme ? Colors.black : Colors.grey,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -211,7 +252,15 @@ class _SearchPageNewState extends State<SearchPageNew> {
                         //   ),
                         // ),
                         const SizedBox(height: 20),
-                        Text(_fetchedText),
+                        if(_currentIndex == 1)
+                          Text(_fetchedText),
+                        if(_currentIndex == 0)
+                        Text(
+                          _responseMessage,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16),
+                        ),
+
                       ],
                     ),
                   ),
