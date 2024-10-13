@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hackathon2024_pizamka/themes/dark_mode.dart';
 import 'package:hackathon2024_pizamka/themes/theme_provider.dart';
@@ -9,9 +10,15 @@ import 'drawer.dart';
 import 'firebase_options.dart';
 import 'home.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // Handle background messages
+  print("Handling a background message: ${message.messageId}");
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   await Firebase.initializeApp(
 
     options: DefaultFirebaseOptions.currentPlatform,
