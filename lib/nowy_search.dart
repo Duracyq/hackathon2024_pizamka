@@ -37,36 +37,43 @@ class _SearchPageNewState extends State<SearchPageNew> {
 
   final List<Map<String, String>> cardData = [
     {
-      'image': 'https://via.placeholder.com/150',
-      'title': 'Tytuł 1',
-      'description': 'Opis karty 1. To jest przykładowy opis dla karty numer 1.'
+      'image': 'assets/dzieci.png',
+      'title': 'Recykling',
+      'description':
+          'Recykling to proces przetwarzania zużytych materiałów i odpadów na surowce, które mogą być ponownie wykorzystane do produkcji nowych produktów, co pomaga chronić środowisko i zmniejszać ilość odpadów.'
     },
     {
-      'image': 'https://via.placeholder.com/150',
-      'title': 'Tytuł 2',
-      'description': 'Opis karty 2. To jest przykładowy opis dla karty numer 2.'
+      'image': 'assets/yellow.png',
+      'title': 'Żółty',
+      'description':
+          'Odpady z plastiku i metalu, takie jak butelki, puszki, opakowania wielomateriałowe.'
     },
     {
-      'image': 'https://via.placeholder.com/150',
-      'title': 'Tytuł 3',
-      'description': 'Opis karty 3. To jest przykładowy opis dla karty numer 3.'
+      'image': 'assets/green.png',
+      'title': 'Zielony',
+      'description':
+          'Odpady szklane, czyli butelki, słoiki i inne produkty ze szkła.'
     },
     {
-      'image': 'https://via.placeholder.com/150',
-      'title': 'Tytuł 4',
-      'description': 'Opis karty 4. To jest przykładowy opis dla karty numer 4.'
+      'image': 'assets/red.png',
+      'title': 'Brązowy',
+      'description':
+          'Odpady bio, takie jak resztki jedzenia, obierki i inne organiczne materiały.'
     },
     {
-      'image': 'https://via.placeholder.com/150',
-      'title': 'Tytuł 5',
-      'description': 'Opis karty 5. To jest przykładowy opis dla karty numer 5.'
+      'image': 'assets/blue.png',
+      'title': 'Niebieski',
+      'description':
+          'Odpady papierowe, np. gazety, kartony, zeszyty i inne wyroby papiernicze.'
     },
     {
-      'image': 'https://via.placeholder.com/150',
-      'title': 'Tytuł 6',
-      'description': 'Opis karty 6. To jest przykładowy opis dla karty numer 6.'
+      'image': 'assets/black.png',
+      'title': 'Czarny',
+      'description':
+          'Odpady zmieszane, których nie można posegregować, takie jak brudne opakowania i resztki tworzyw sztucznych.'
     },
   ];
+
   Future<void> _uploadImage() async {
     if (_image == null) return;
 
@@ -295,53 +302,57 @@ class _SearchPageNewState extends State<SearchPageNew> {
                         ),
                         const SizedBox(height: 20),
                         Container(
-                            height: 300,
-                            child: PageView.builder(
-                                controller: _cardController,
-                                itemCount: 6,
-                                itemBuilder: (context, index) {
-                                  return Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16.0),
+                          height: 300,
+                          child: PageView.builder(
+                            controller: _cardController,
+                            itemCount: cardData.length,
+                            itemBuilder: (context, index) {
+                              final card = cardData[index];
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                elevation: 5,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(16.0),
+                                      ),
+                                      child: Image.asset(
+                                        card['image']!,
+                                        height: 150,
+                                        width: double.infinity,
+                                        fit: index == 0
+                                            ? BoxFit.cover
+                                            : BoxFit.contain,
+                                      ),
                                     ),
-                                    elevation: 5,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(16.0),
-                                          ),
-                                          child: Image.network(
-                                            'https://via.placeholder.com/150',
-                                            height: 150,
-                                            width: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        card['title']!,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            'Tytuł $index',
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Text(
-                                            'Opis karty $index. To jest przykładowy opis dla karty numer $index.',
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                  );
-                                })),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        card['description']!,
+                                        style: TextStyle(fontSize: 13),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
