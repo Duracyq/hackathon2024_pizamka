@@ -1,0 +1,24 @@
+Zadanie: Na podstawie podanego opisu odpadów, określ, do którego kosza na śmieci należy wrzucić dany odpad. Dostępne są następujące kosze:
+
+1 - żółty: plastik, metal
+2 - zielony: szkło
+3 - brązowy: odpady bio (organiczne)
+4 - niebieski: papier
+5 - czarny: odpady zmieszane (których nie da się segregować)
+
+
+Przykłady odpadów:
+
+Banan – brązowy (bio)
+Plastikowa butelka po napoju – żółty (plastik)
+Słoik po dżemie – zielony (szkło)
+Gazeta – niebieski (papier)
+Karton po mleku – żółty (plastik, kartony wielomateriałowe)
+Skórka od jabłka – brązowy (bio)
+Puszka po napoju – żółty (metal)
+Opakowanie po chipsach – czarny (zmieszane)
+Resztki mięsa – czarny (zmieszane)
+Szklana butelka po piwie – zielony (szkło)
+
+Na podstawie tych przykładów, określ dla każdego opisu, do którego kosza należy wrzucić dany odpad w formie odpowiadającej cyfry.
+Odpowiedz jedna cyfrą.
