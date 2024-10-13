@@ -49,14 +49,14 @@ class _InfoState extends State<Info> {
             TextField(
               controller: _controller,
               decoration: InputDecoration(
-                hintText: 'Enter your text here',
+                hintText: 'Wpisz swój odpad',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: _sendRequest,
-              child: Text('Send Request'),
+              child: Text('Zapytaj model'),
             ),
             SizedBox(height: 16),
             Text(_responseText),

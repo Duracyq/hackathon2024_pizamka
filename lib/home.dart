@@ -89,6 +89,7 @@ class _HomePageState extends State<HomePage> {
     final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -113,13 +114,16 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: DotCurvedBottomNav(
         hideOnScroll: false,
         indicatorColor: Theme.of(context).colorScheme.primary,
-        backgroundColor: Colors.black,
+        backgroundColor: isLightTheme
+            ? (const Color.fromARGB(255, 206, 206, 206) ??
+                const Color.fromARGB(255, 89, 89, 89))
+            : Colors.black,
         animationDuration: const Duration(milliseconds: 300),
         animationCurve: Curves.ease,
         selectedIndex: _currentPage,
         indicatorSize: 6,
-        borderRadius: 25,
-        height: 65,
+        borderRadius: 30,
+        height: 70,
         onTap: (index) {
           setState(() => _currentPage = index);
         },

@@ -151,10 +151,13 @@ class _SearchPageNewState extends State<SearchPageNew> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      /*
       appBar: AppBar(
         title: const Text('Wyszukiwarka odpadów'),
       ),
+      */
       body: Column(
         children: [
           CustomSlidingSegmentedControl<int>(
@@ -214,16 +217,61 @@ class _SearchPageNewState extends State<SearchPageNew> {
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
-                        _image == null
-                            ? Text('Nie wybrano obrazu.')
-                            : Image.file(_image!),
-                        ElevatedButton(
-                          onPressed: _pickImage,
-                          child: const Text('Wybierz obraz'),
+                        Center(
+                          child: _image == null
+                              ? Text('Nie wybrano obrazu.')
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      16.0), // Zaokrąglone rogi
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 3), // cieniowanie
+                                        ),
+                                      ],
+                                    ),
+                                    child: Image.file(_image!),
+                                  ),
+                                ),
                         ),
-                        ElevatedButton(
-                          onPressed: _uploadImage,
-                          child: const Text('Prześlij obraz'),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                onPressed: _pickImage,
+                                child: const Text('Wybierz obraz'),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        8.0), // Mniej zaokrąglone rogi
+                                  ),
+                                  elevation: 5,
+                                  shadowColor:
+                                      isDarkTheme ? Colors.black : Colors.grey,
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: _uploadImage,
+                                child: const Text('Prześlij obraz'),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        8.0), // Mniej zaokrąglone rogi
+                                  ),
+                                  elevation: 5,
+                                  shadowColor:
+                                      isDarkTheme ? Colors.black : Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         TextField(
                           onChanged: (value) async {
@@ -240,7 +288,7 @@ class _SearchPageNewState extends State<SearchPageNew> {
                             }
                           },
                           decoration: InputDecoration(
-                            hintText: 'Szukaj po adresie',
+                            hintText: 'trzeba usunac ten textfield',
                             prefixIcon: const Icon(Icons.search),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),

@@ -29,8 +29,11 @@ class _HomeHomePageState extends State<HomeHomePage> {
         children: [
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Enter your username',
+              hintText: 'Wyszukaj swoją lokalizację',
+              prefixIcon: const Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
           const SizedBox(height: 20),
