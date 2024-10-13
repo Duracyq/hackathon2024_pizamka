@@ -93,7 +93,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(_titles[_currentPage]),
+        // title: Text(_titles[_currentPage]),
+        title: Column(
+          children: [
+            Image.asset('logo.png', height: 40),
+            Text(
+              _titles[_currentPage],
+                style: TextStyle(
+                  color: Provider.of<ThemeProvider>(context).themeData == darkMode
+                      ? Colors.white
+                      : Colors.black,
+                ),
+              ),
+          ],
+        ),
         scrolledUnderElevation: 4,
         shadowColor: Theme.of(context).colorScheme.shadow,
         actions: [
