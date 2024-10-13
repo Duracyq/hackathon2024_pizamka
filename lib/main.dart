@@ -6,7 +6,7 @@ import 'package:hackathon2024_pizamka/themes/dark_mode.dart';
 import 'package:hackathon2024_pizamka/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:deadsimplechat_sdk_flutter/deadsimplechat_sdk_flutter.dart';
-
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'drawer.dart';
 import 'firebase_options.dart';
 import 'home.dart';
@@ -52,8 +52,10 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Hackathon Plock 2024',
-            theme: themeProvider.themeData,
-            darkTheme: darkMode,
+            theme: FlexThemeData.light(scheme: FlexScheme.greenM3),
+            //theme: themeProvider.themeData,
+            darkTheme: FlexThemeData.dark(scheme: FlexScheme.greenM3),
+            //darkTheme: darkMode,
             themeMode: themeProvider.themeMode,
             home: const HomePage(),
           );

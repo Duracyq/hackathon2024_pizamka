@@ -9,6 +9,7 @@ import 'drawer.dart';
 import 'event_design_page.dart';
 import 'homehome_page.dart';
 import 'nowy_search.dart';
+import 'right_app_bar.dart';
 import 'settings.dart';
 import 'themes/dark_mode.dart';
 import 'themes/theme_provider.dart';
@@ -91,7 +92,8 @@ class _HomePageState extends State<HomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     bool isLightTheme = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
-      appBar: AppBar(
+      appBar: SliverExample(),
+      /*AppBar(
         centerTitle: true,
         title: Text(_titles[_currentPage]),
         scrolledUnderElevation: 4,
@@ -109,6 +111,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      */
       //drawer: AppDrawer(),
       body: _pages[_currentPage],
       bottomNavigationBar: DotCurvedBottomNav(

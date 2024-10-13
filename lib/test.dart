@@ -51,23 +51,28 @@ class _NavigationDrawerExampleState extends State<NavigationDrawerExample> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: screenIndex,
-        onDestinationSelected: (int index) {
-          setState(() {
-            screenIndex = index;
-          });
-        },
-        destinations: destinations.map(
-          (ExampleDestination destination) {
-            return NavigationDestination(
-              label: destination.label,
-              icon: destination.icon,
-              selectedIcon: destination.selectedIcon,
-              tooltip: destination.label,
-            );
-          },
-        ).toList(),
+      bottomNavigationBar: Column(
+        children: [
+          SizedBox(height: 16),
+          NavigationBar(
+            selectedIndex: screenIndex,
+            onDestinationSelected: (int index) {
+              setState(() {
+                screenIndex = index;
+              });
+            },
+            destinations: destinations.map(
+              (ExampleDestination destination) {
+                return NavigationDestination(
+                  label: destination.label,
+                  icon: destination.icon,
+                  selectedIcon: destination.selectedIcon,
+                  tooltip: destination.label,
+                );
+              },
+            ).toList(),
+          ),
+        ],
       ),
     );
   }
@@ -77,45 +82,48 @@ class _NavigationDrawerExampleState extends State<NavigationDrawerExample> {
       key: scaffoldKey,
       body: SafeArea(
         bottom: false,
-        top: false,
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: NavigationRail(
-                minWidth: 50,
-                destinations: destinations.map(
-                  (ExampleDestination destination) {
-                    return NavigationRailDestination(
-                      label: Text(destination.label),
-                      icon: destination.icon,
-                      selectedIcon: destination.selectedIcon,
-                    );
+        top: true,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: NavigationRail(
+                  minWidth: 50,
+                  destinations: destinations.map(
+                    (ExampleDestination destination) {
+                      return NavigationRailDestination(
+                        label: Text(destination.label),
+                        icon: destination.icon,
+                        selectedIcon: destination.selectedIcon,
+                      );
+                    },
+                  ).toList(),
+                  selectedIndex: screenIndex,
+                  useIndicator: true,
+                  onDestinationSelected: (int index) {
+                    setState(() {
+                      screenIndex = index;
+                    });
                   },
-                ).toList(),
-                selectedIndex: screenIndex,
-                useIndicator: true,
-                onDestinationSelected: (int index) {
-                  setState(() {
-                    screenIndex = index;
-                  });
-                },
+                ),
               ),
-            ),
-            const VerticalDivider(thickness: 1, width: 1),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Text('Page Index = $screenIndex'),
-                  ElevatedButton(
-                    onPressed: openDrawer,
-                    child: const Text('Open Drawer'),
-                  ),
-                ],
+              const VerticalDivider(thickness: 1, width: 1),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text('Page Index = $screenIndex'),
+                    ElevatedButton(
+                      onPressed: openDrawer,
+                      child: const Text('Open Drawer'),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       endDrawer: NavigationDrawer(
