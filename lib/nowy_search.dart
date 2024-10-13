@@ -64,6 +64,7 @@ class _SearchPageNewState extends State<SearchPageNew> {
 
   // Function to fetch data from API
   Future<void> fetchData(String query) async {
+    //! Update the URI with your API endpoint
     final uri = Uri.parse('http://10.0.2.2:8090/api/collections/wywozy/records?filter=(ulica~"$query")');
     print('Requesting data from: $uri'); // Debugging the URI being requested
 
@@ -169,6 +170,9 @@ class _SearchPageNewState extends State<SearchPageNew> {
               itemBuilder: (context, index) {
                 var record = searchResults[index];
                 debugPrint('Displaying record: $record'); // Debugging each record being displayed
+                // if(record['timestamps_json'] == null) {
+                //   return Container();
+                // }
                 return ListTile(
                   title: Text(record['ulica'] ?? 'No address'),
                   subtitle: Text(
