@@ -92,34 +92,35 @@ class _HomePageState extends State<HomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     bool isLightTheme = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
-      appBar: SliverExample(),
-      /*AppBar(
-        centerTitle: true,
-        title: Text(_titles[_currentPage]),
-        scrolledUnderElevation: 4,
-        shadowColor: Theme.of(context).colorScheme.shadow,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              size: 30,
-              color: Provider.of<ThemeProvider>(context).themeData == darkMode
-                  ? Colors.white
-                  : Colors.black,
-            ),
-            onPressed: _navigateToSettings,
-          ),
-        ],
-      ),
-      */
+      appBar: _currentPage == 0
+          ? AppBar(
+              centerTitle: true,
+              title: Text(_titles[_currentPage]),
+              scrolledUnderElevation: 4,
+              shadowColor: Theme.of(context).colorScheme.shadow,
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.settings,
+                    size: 30,
+                    color: Provider.of<ThemeProvider>(context).themeData ==
+                            darkMode
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+                  onPressed: _navigateToSettings,
+                ),
+              ],
+            )
+          : null,
       //drawer: AppDrawer(),
       body: _pages[_currentPage],
       bottomNavigationBar: DotCurvedBottomNav(
         hideOnScroll: false,
         indicatorColor: Theme.of(context).colorScheme.primary,
         backgroundColor: isLightTheme
-            ? (const Color.fromARGB(255, 206, 206, 206) ??
-                const Color.fromARGB(255, 89, 89, 89))
+            ? (const Color.fromARGB(255, 219, 219, 219) ??
+                const Color.fromARGB(255, 117, 117, 117))
             : Colors.black,
         animationDuration: const Duration(milliseconds: 300),
         animationCurve: Curves.ease,
